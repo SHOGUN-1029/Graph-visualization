@@ -1,4 +1,4 @@
-simple graph vizualization using the graph viz javascript library . you can download the required librarires using npm or import them from CDN .
+simple graph vizualization using the graph viz javascript library . you can download the required librarires using npm or import them from CDN.
 
 input : in format [vertex vertex edge_length]
 
