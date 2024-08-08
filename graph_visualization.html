@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Graph Visualization</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/viz.js/2.1.2/viz.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/viz.js/2.1.2/full.render.js"></script>
+</head>
+<body>
+    <textarea id="inputData" rows="5" cols="30" placeholder="Enter edges and vertices"></textarea><br>
+    <label>
+        <input type="radio" name="graphType" value="directed" checked> Directed Graph
+    </label>
+    <label>
+        <input type="radio" name="graphType" value="undirected"> Undirected Graph
+    </label><br><br>
+    <button onclick="generateGraph()">Generate Graph</button>
+    <div id="graphContainer"></div>
+
+    <script>
+        function generateGraph() {
+            var inputData = document.getElementById("inputData").value;
+            var lines = inputData.split('\n');
+            
+            // Determine graph type from selected radio button
+            var graphType = document.querySelector('input[name="graphType"]:checked').value;
+            var graphString = graphType === 'directed' ? 'digraph {' : 'graph {';
+
+            for (var i = 0; i < lines.length; i++) {
+                var tokens = lines[i].trim().split(/\s+/);
+                if (tokens.length >= 2) {
+                    graphString += tokens[0] + (graphType === 'directed' ? ' -> ' : ' -- ') + tokens[1];
+                    if (tokens.length >= 3) {
+                        graphString += ' [label="' + tokens[2] + '"]';
+                    }
+                    graphString += ';';
+                }
+            }
+            graphString += '}';
+
+            const viz = new Viz();
+            viz.renderSVGElement(graphString)
+                .then(function(element) {
+                    var graphContainer = document.getElementById("graphContainer");
+                    graphContainer.innerHTML = ''; // Clear previous content
+                    graphContainer.appendChild(element);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
+    </script>
+</body>
+</html>
