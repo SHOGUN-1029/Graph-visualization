@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Graph Visualization</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/viz.js/2.1.2/viz.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/viz.js/2.1.2/full.render.js"></script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <textarea id="inputData" rows="5" cols="30" placeholder="Enter edges and vertices"></textarea><br>
+    <label>
+        <input type="radio" name="graphType" value="directed" checked> Directed Graph
+    </label>
+    <label>
+        <input type="radio" name="graphType" value="undirected"> Undirected Graph
+    </label><br><br>
+    <button onclick="generateGraph()">Generate Graph</button>
+    <div id="graphContainer"></div>
+</body>
+</html>
